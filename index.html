@@ -2,434 +2,283 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Culture Finance Standard</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="A shared way to assess and verify the cultural value of projects, so funders can back them and report on it. A 3dots initiative, in pilot in 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Culture Finance Standard: a ruled ledger in a standards-sheet typeface */
+/* Look and feel follow 3dots' own documents: Montserrat titles, Roboto text,
+   white pages with soft colour auras, and outlined pill tags. */
 :root{
-  --paper:#F3F6F2;      /* pale ledger paper */
-  --sheet:#FFFFFF;      /* registry sheet */
-  --ink:#0A2A1E;        /* ledger ink, deep green */
-  --muted:#4E5A53;
-  --rule:#2F6B4F;       /* ruling green */
-  --rule-soft:#C6D3CA;
-  --sans:'Barlow',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --narrow:'Barlow Semi Condensed','Barlow',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --wrap:76rem;
-  --gutter:clamp(1.25rem,4vw,3rem);
+  --ink:#000000;
+  --text:#262626;
+  --soft:#5f5f5f;
+  --line:#000000;
+  --pink:#ff4fa0;
+  --orange:#ff7a33;
+  --blue:#8fb0f5;
+  --lilac:#c7b3f5;
+  --yellow:#f5d65a;
+  --title:'Montserrat',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --body:'Roboto',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --wrap:70rem;
+  --gutter:clamp(1.25rem,5vw,3.5rem);
+  color-scheme:light;
 }
-
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:var(--sans);
-  background:var(--paper);
+body{background:#fff;color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h1,h2,h3{font-family:var(--title);color:var(--ink);font-weight:500;line-height:1.15}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+strong{font-weight:700;color:var(--ink)}
+
+.wrap{position:relative;z-index:1;max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+
+/* Colour auras, as on the 3dots document pages */
+.aura{position:absolute;z-index:0;border-radius:50%;filter:blur(70px);opacity:.6;pointer-events:none}
+section,header.site,footer{position:relative}
+header.site{z-index:2}
+.page{position:relative;overflow:hidden}
+.aura-hero{width:46rem;height:46rem;right:-16rem;top:-18rem;background:radial-gradient(circle at 40% 40%,var(--pink),var(--orange) 55%,transparent 72%)}
+.aura-areas{width:36rem;height:36rem;left:-18rem;top:10%;background:radial-gradient(circle,var(--blue),var(--lilac) 50%,transparent 72%)}
+.aura-gallery{width:42rem;height:42rem;right:-20rem;bottom:-10rem;background:radial-gradient(circle,var(--yellow),var(--orange) 45%,transparent 72%)}
+.aura-people{width:34rem;height:34rem;left:-14rem;bottom:-14rem;background:radial-gradient(circle,var(--pink),var(--lilac) 50%,transparent 72%)}
+
+/* Pill tags */
+.pill{
+  display:inline-block;
+  padding:.35rem 1.05rem;
+  border:1.5px solid var(--line);
+  border-radius:999px;
+  background:#fff;
   color:var(--ink);
-  font-size:17px;
-  line-height:1.55;
-  font-variant-numeric:tabular-nums;
-  -webkit-font-smoothing:antialiased;
-}
-
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none;background:transparent;color:inherit}
-em{font-style:normal}
-:focus-visible{outline:2px solid var(--rule);outline-offset:3px}
-::selection{background:var(--ink);color:var(--paper)}
-
-/* ============ NAV ============ */
-.nav{
-  position:sticky;top:0;z-index:100;
-  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.5rem;
-  padding:.9rem var(--gutter);
-  background:var(--paper);
-  border-bottom:2px solid var(--ink);
-}
-.nav-brand{font-family:var(--narrow);font-size:1.3rem;font-weight:700;line-height:1.1}
-.nav-section{
-  padding-left:1rem;
-  border-left:1px solid var(--rule-soft);
-  color:var(--muted);
-  font-size:.95rem;
-  font-weight:500;
-}
-.nav-links{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;margin-left:auto}
-.nav-links button{
-  padding:.3rem 0;
-  border-bottom:2px solid transparent;
-  color:var(--muted);
-  font-size:.95rem;
-  font-weight:500;
-}
-.nav-links button:hover{color:var(--ink)}
-.nav-links button.active{color:var(--ink);border-bottom-color:var(--rule)}
-.nav-audience{
-  padding-left:1rem;
-  border-left:1px solid var(--rule-soft);
-  color:var(--muted);
+  font-family:var(--body);
   font-size:.9rem;
+  line-height:1.3;
+  white-space:nowrap;
 }
 
-/* ============ KEY FIGURES: the ledger row ============ */
-.ticker{background:var(--sheet);border-bottom:1px solid var(--rule)}
-.ticker-inner{
-  max-width:var(--wrap);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-}
-.tick{display:flex;flex-direction:column;gap:.5rem;padding:1.6rem 1.5rem 1.4rem}
-.tick:first-child{padding-left:0}
-.tick:not(:first-child){border-left:1px solid var(--rule-soft)}
-.tick-val{
-  font-family:var(--narrow);
-  font-size:clamp(2.6rem,5.2vw,4.25rem);
-  font-weight:700;
-  line-height:.9;
-  letter-spacing:-.01em;
-}
-.tick-label{color:var(--muted);font-size:.95rem;font-weight:500;line-height:1.3}
-.tick-sep{display:none}
+/* Header */
+header.site .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 2rem;padding-top:1.4rem;padding-bottom:1.4rem}
+.brand{font-family:var(--title);font-weight:600;font-size:1.15rem;color:var(--ink);text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem 1.5rem}
+nav a{font-size:.95rem;color:var(--text);text-decoration:none}
+nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
 
-/* ============ MAIN ============ */
-.main{
-  max-width:var(--wrap);
-  margin:0 auto;
-  padding:clamp(3rem,7vw,6rem) var(--gutter) clamp(4rem,8vw,7rem);
-}
+/* Opening */
+.intro{padding:clamp(3.5rem,9vw,7.5rem) 0 clamp(4rem,9vw,7rem)}
+.intro .pills{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
+.intro h1{max-width:17ch;margin-bottom:1.5rem;font-size:clamp(2.3rem,5.2vw,4.3rem);font-weight:400;letter-spacing:-.01em}
+.intro .lead{max-width:38rem;font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--text)}
 
-/* ============ HOW IT WORKS ============ */
-.hiw{display:none}
-.hiw.active{display:block}
+/* Sections */
+.block{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.block h2{max-width:24ch;margin-bottom:1.5rem;font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:500}
+.measure{max-width:40rem}
+.quote-lines{margin-bottom:1.75rem;font-family:var(--title);font-size:clamp(1.25rem,2.2vw,1.65rem);line-height:1.4;color:var(--ink)}
+.quote-lines span{display:block}
 
-.hiw-intro{margin:0 0 clamp(3rem,6vw,5rem)}
-.hiw-intro h2{
-  max-width:22ch;
-  margin-bottom:1.5rem;
-  font-family:var(--narrow);
-  font-size:clamp(2.2rem,4.6vw,3.9rem);
-  font-weight:600;
-  line-height:1.04;
-  letter-spacing:-.015em;
-}
-.hiw-intro p{max-width:40rem;color:var(--muted);font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.5}
+/* Six impact areas as pills */
+.areas{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem;margin:2rem 0 1.5rem}
+.areas li{padding:.7rem 1.4rem;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-family:var(--title);font-size:clamp(1rem,1.6vw,1.2rem);color:var(--ink)}
+.small{color:var(--soft);font-size:.95rem}
 
-.hiw-architecture{margin-bottom:clamp(3rem,6vw,5rem)}
-.hiw-arch-label{
-  max-width:30ch;
-  margin-bottom:1.5rem;
-  font-family:var(--narrow);
-  font-size:clamp(1.45rem,2.4vw,1.9rem);
-  font-weight:600;
-  line-height:1.15;
-}
-.hiw-arch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid var(--ink)}
-.hiw-arch-item{
-  display:grid;
-  grid-template-columns:3.25rem minmax(0,1fr);
-  gap:1rem;
-  padding:1.5rem 0 1.75rem;
-  border-bottom:1px solid var(--rule-soft);
-}
-.hiw-arch-item:nth-child(odd){padding-right:2rem;border-right:1px solid var(--rule-soft)}
-.hiw-arch-item:nth-child(even){padding-left:2rem}
-.hiw-arch-num{font-family:var(--narrow);font-size:1.6rem;font-weight:700;line-height:1;color:var(--rule)}
-.hiw-arch-title{margin-bottom:.4rem;font-size:1.15rem;font-weight:600;line-height:1.25}
-.hiw-arch-desc{color:var(--muted);font-size:1rem;line-height:1.5}
+/* Shades of impact: a gradient from faint to full */
+.shades{margin:2.25rem 0 2rem}
+.shade-bar{height:1.1rem;border-radius:999px;background:linear-gradient(90deg,#f3eef7 0%,#f9b4d3 38%,#ff6aa6 68%,#ff7a33 100%)}
+.shade-labels{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:.9rem}
+.shade-labels li{font-family:var(--title);font-weight:500;color:var(--ink);font-size:1.05rem;line-height:1.3}
+.shade-labels li span{display:block;font-family:var(--body);font-weight:400;font-size:.9rem;color:var(--soft)}
+.shade-labels li:first-child{color:var(--soft)}
 
-/* The two routes through the platform, on a registry sheet */
-.hiw-flow{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  margin-bottom:clamp(3rem,6vw,5rem);
-  background:var(--sheet);
-  border:1px solid var(--rule);
-}
-.hiw-side{padding:clamp(1.5rem,3vw,2.5rem)}
-.hiw-side:first-child{border-right:1px solid var(--rule)}
-.hiw-side-label{
-  margin-bottom:.5rem;
-  padding-bottom:.75rem;
-  border-bottom:2px solid var(--ink);
-  font-family:var(--narrow);
-  font-size:1.55rem;
-  font-weight:700;
-  line-height:1.1;
-}
-.hiw-step{
-  display:grid;
-  grid-template-columns:2.75rem minmax(0,1fr);
-  gap:.75rem;
-  padding:1rem 0;
-  border-bottom:1px solid var(--rule-soft);
-}
-.hiw-step:last-child{border-bottom:0;padding-bottom:0}
-.hiw-step-num{padding-top:.05rem;font-family:var(--narrow);font-size:1.05rem;font-weight:700;color:var(--rule)}
-.hiw-step-name{margin-bottom:.2rem;font-size:1.05rem;font-weight:600}
-.hiw-step-desc{color:var(--muted);font-size:.98rem;line-height:1.5}
+/* Two routes */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,4vw,3.5rem);margin-top:2.5rem}
+.route{padding:clamp(1.5rem,3vw,2.25rem);border:1.5px solid var(--line);border-radius:1.75rem;background:rgba(255,255,255,.82)}
+.route h3{margin-bottom:1rem;font-size:1.35rem;font-weight:500}
+.note{margin-top:2.25rem}
+.pill-row{margin-bottom:1.25rem}
 
-.hiw-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
-.hiw-pillar{padding-top:1.1rem;border-top:6px solid var(--rule)}
-.hiw-pillar-title{margin-bottom:.6rem;font-family:var(--narrow);font-size:1.4rem;font-weight:700;line-height:1.15}
-.hiw-pillar-text{font-size:1rem;line-height:1.55}
+/* People */
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem clamp(2rem,5vw,4rem);margin-top:2rem}
+.people h3{margin-bottom:.9rem;font-size:1.15rem;font-weight:600}
+.people ul{list-style:none}
+.people li{padding:.5rem 0;line-height:1.4}
+.people li span{display:block;color:var(--soft);font-size:.92rem}
 
-/* ============ SOON VIEW ============ */
-.soon-view{display:none;min-height:50vh;padding:clamp(2rem,6vw,5rem) 0}
-.soon-view.active{display:block}
-.soon-h1{
-  margin-bottom:1.5rem;
-  font-family:var(--narrow);
-  font-size:clamp(3.5rem,10vw,8rem);
-  font-weight:700;
-  line-height:.92;
-  letter-spacing:-.02em;
-}
-.soon-sub{max-width:36rem;margin-bottom:2.5rem;color:var(--muted);font-size:clamp(1.1rem,1.6vw,1.3rem);line-height:1.5}
-.back-btn{
-  padding:.85rem 1.4rem;
-  border:2px solid var(--ink);
-  color:var(--ink);
-  font-size:1rem;
-  font-weight:600;
-}
-.back-btn:hover{background:var(--ink);color:var(--paper)}
+/* Footer */
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem 3rem;padding-top:2.5rem;padding-bottom:2.75rem}
+footer .name{font-family:var(--title);font-weight:600;font-size:1.05rem;color:var(--ink)}
+footer p{color:var(--soft);font-size:.92rem}
+footer a{color:var(--ink)}
 
-/* ============ FOOTER ============ */
-.foot{padding:2.5rem var(--gutter) 1.5rem;border-top:2px solid var(--ink);background:var(--paper)}
-.foot-inner{
-  max-width:var(--wrap);margin:0 auto;
-  display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:2rem;
+@media (max-width:760px){
+  .routes,.people{grid-template-columns:1fr}
+  .aura{filter:blur(50px);opacity:.5}
+  .aura-hero{width:24rem;height:24rem;right:-11rem;top:-9rem}
+  .aura-areas{width:22rem;height:22rem;left:-13rem}
+  .aura-gallery{width:24rem;height:24rem;right:-13rem}
+  .aura-people{width:22rem;height:22rem;left:-12rem;bottom:-10rem}
+  .shades{display:grid;grid-template-columns:.9rem minmax(0,1fr);gap:1.25rem}
+  .shade-bar{height:auto;background:linear-gradient(180deg,#f3eef7 0%,#f9b4d3 38%,#ff6aa6 68%,#ff7a33 100%)}
+  .shade-labels{grid-template-columns:1fr;gap:1.1rem;margin-top:0}
 }
-.foot-brand{font-family:var(--narrow);font-size:1.3rem;font-weight:700}
-.foot-tagline{max-width:26rem;margin-top:.4rem;color:var(--muted);font-size:1rem}
-.foot-meta{text-align:right;color:var(--muted);font-size:.95rem}
-.foot-meta-item{margin-bottom:.25rem}
-.foot-bottom{
-  max-width:var(--wrap);margin:1.75rem auto 0;
-  padding-top:1rem;
-  border-top:1px solid var(--rule-soft);
-  display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;
-  color:var(--muted);
-  font-size:.88rem;
-}
-
-/* responsive */
-@media(max-width:880px){
-  .nav{position:static}
-  .nav-links{width:100%;margin-left:0}
-  .nav-audience{width:100%;padding-left:0;border-left:0}
-  .ticker-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .tick:nth-child(5){padding-left:0;border-left:0}
-  .tick:nth-child(5),.tick:nth-child(7){border-top:1px solid var(--rule-soft)}
-  .hiw-arch-grid,.hiw-flow,.hiw-pillars{grid-template-columns:1fr}
-  .hiw-arch-item:nth-child(odd){padding-right:0;border-right:0}
-  .hiw-arch-item:nth-child(even){padding-left:0}
-  .hiw-side:first-child{border-right:0;border-bottom:1px solid var(--rule)}
-  .foot-meta{text-align:left}
-}
-@media(max-width:480px){
-  .tick{padding:1.25rem 1rem 1.1rem}
-  .tick:first-child,.tick:nth-child(5){padding-left:0}
-}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<div class="page">
 
-<nav class="nav">
-  <div class="nav-brand">Culture <em>Finance</em> Standard</div>
-  <span class="nav-section" id="nav-section-title">Overview</span>
-  <div class="nav-links">
-    <button id="nav-gallery" onclick="showView('soon')">Discover (Soon)</button>
-    <button class="active" id="nav-hiw" onclick="showView('hiw')">How it works</button>
-    <button id="nav-submit" onclick="showView('soon')">Submit a Project (Soon)</button>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">Culture Finance Standard</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#why">Why</a></li>
+        <li><a href="#areas">Impact areas</a></li>
+        <li><a href="#assessment">Assessment</a></li>
+        <li><a href="#gallery">The Gallery</a></li>
+        <li><a href="#pilot">Pilot</a></li>
+        <li><a href="#people">People</a></li>
+      </ul>
+    </nav>
   </div>
-  <span class="nav-audience">For Funders · Foundations · Public Bodies · Operators</span>
-</nav>
+</header>
 
-<div class="ticker">
-  <div class="ticker-inner">
-    <div class="tick"><span class="tick-val">6</span><span class="tick-label">C-Domains</span></div>
-    <div class="tick-sep"></div>
-    <div class="tick"><span class="tick-val">7</span><span class="tick-label">Safeguard Gates</span></div>
-    <div class="tick-sep"></div>
-    <div class="tick"><span class="tick-val">141</span><span class="tick-label">Sub-Indicators</span></div>
-    <div class="tick-sep"></div>
-    <div class="tick"><span class="tick-val">v.1</span><span class="tick-label">Pilot Phase · 2026</span></div>
-  </div>
-</div>
+<main id="top">
 
-<main class="main">
+  <section class="intro has-aura">
+    <div class="aura aura-hero"></div>
+    <div class="wrap">
+      <div class="pills"><span class="pill">Version 1.0</span><span class="pill">Pilot, 2026</span></div>
+      <h1>Culture creates value that finance still can’t see.</h1>
+      <p class="lead">The Culture Finance Standard is a shared way to assess and verify that value, so funders can back cultural projects and report on them the way they already do for climate and social impact.</p>
+    </div>
+  </section>
 
-<div class="hiw active" id="view-hiw">
+  <section class="block" id="why">
+    <div class="wrap">
+      <h2>Why we’re building it</h2>
+      <p class="quote-lines"><span>Climate has its standards.</span><span>Social impact has its measurement.</span><span>Cultural value is still the largest thing sustainability finance doesn’t measure.</span></p>
+      <div class="measure">
+        <p>Money follows what can be measured. As long as cultural value stays invisible in reporting, it stays out of investment decisions, however much it matters to people and places.</p>
+        <p>The standard brings together years of our work at 3dots on new ways to fund culture, with partners from finance, law and research.</p>
+      </div>
+    </div>
+  </section>
 
-<div class="hiw-intro">
-  <h2>A standard only becomes infrastructure when someone builds the <em>machinery</em> around it.</h2>
-  <p>The Culture Finance Standard defines what cultural value creation is and how it should be assessed. The Gallery is where the framework is applied — a working platform connecting cultural organisations seeking funding with allocators seeking verified cultural impact.</p>
-</div>
+  <section class="block has-aura" id="areas">
+    <div class="aura aura-areas"></div>
+    <div class="wrap">
+      <h2>Six areas where culture creates value</h2>
+      <p class="measure">Every project is looked at across six cultural impact areas. Under them sit 141 indicators.</p>
+      <ul class="areas">
+        <li>Participation and access</li>
+        <li>Livelihoods and creative economies</li>
+        <li>Place and heritage</li>
+        <li>Social cohesion and peacebuilding</li>
+        <li>Cognitive environment</li>
+        <li>Climate-linked cultural resilience</li>
+      </ul>
+    </div>
+  </section>
 
-<div class="hiw-architecture">
-  <div class="hiw-arch-label">The Standard rests on four interdependent components</div>
-  <div class="hiw-arch-grid">
-    <div class="hiw-arch-item">
-      <div class="hiw-arch-num">I.</div>
-      <div>
-        <div class="hiw-arch-title">Six Cultural Impact Areas (C-Domains)</div>
-        <div class="hiw-arch-desc">Participation &amp; access, livelihoods &amp; creative economies, place &amp; heritage, social cohesion &amp; peacebuilding, cognitive environment, and climate-linked cultural resilience.</div>
+  <section class="block" id="assessment">
+    <div class="wrap">
+      <h2>How a project is assessed</h2>
+      <div class="measure">
+        <p>Safeguards come first. Seven safeguard gates screen out harm, including displacement, extraction, elite capture, cognitive harm and instrumentalisation. A project that fails a safeguard can’t be listed, whatever its other results.</p>
+        <p>The project is then assessed on depth, breadth and duration: how deep its effect goes, how widely it reaches and how long it lasts. That places it in one of four shades of impact.</p>
       </div>
-    </div>
-    <div class="hiw-arch-item">
-      <div class="hiw-arch-num">II.</div>
-      <div>
-        <div class="hiw-arch-title">Shades of Impact</div>
-        <div class="hiw-arch-desc">A non-binary classification across Depth, Breadth, and Duration — Symbolic, Incremental, Structural, Transformative. Purely symbolic activity does not qualify.</div>
+      <div class="shades" role="group" aria-label="The four shades of impact, from faintest to strongest">
+        <div class="shade-bar" aria-hidden="true"></div>
+        <ul class="shade-labels">
+          <li>Symbolic<span>Doesn’t qualify on its own</span></li>
+          <li>Incremental</li>
+          <li>Structural</li>
+          <li>Transformative</li>
+        </ul>
       </div>
+      <p class="measure">Results are reported as contributions. In complex systems no single project causes change on its own, so none is asked to claim it.</p>
     </div>
-    <div class="hiw-arch-item">
-      <div class="hiw-arch-num">III.</div>
-      <div>
-        <div class="hiw-arch-title">Safeguards &amp; Integrity</div>
-        <div class="hiw-arch-desc">Exclusion criteria covering displacement, extraction, elite capture, cognitive harm, and instrumentalisation. Safeguards override all other assessment.</div>
-      </div>
-    </div>
-    <div class="hiw-arch-item">
-      <div class="hiw-arch-num">IV.</div>
-      <div>
-        <div class="hiw-arch-title">Attribution &amp; Reporting Discipline</div>
-        <div class="hiw-arch-desc">A contribution-based approach rejecting over-claiming. Outcomes are stated as contributions to complex systems, not singular causal claims.</div>
-      </div>
-    </div>
-  </div>
-</div>
+  </section>
 
-<div class="hiw-flow">
-  <div class="hiw-side operators">
-    <div class="hiw-side-label">For Cultural Operators</div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">I.</div>
-      <div>
-        <div class="hiw-step-name">Submit</div>
-        <div class="hiw-step-desc">A structured submission against the Standard — no specialist knowledge required. Listing is free for all cultural organisations.</div>
+  <section class="block has-aura" id="gallery">
+    <div class="aura aura-gallery"></div>
+    <div class="wrap">
+      <h2>The Gallery</h2>
+      <p class="measure">The Gallery is the platform where the standard is used. It connects cultural organisations looking for funding with funders looking for verified cultural impact.</p>
+      <div class="routes">
+        <div class="route">
+          <h3>If you run a cultural project</h3>
+          <p>You submit your project against the standard. You don’t need specialist knowledge, and listing is free.</p>
+          <p>Independent assessors review it and check every safeguard. Once it’s approved, a Cultural Contribution Unit (CCU) is recorded on its profile and the project appears in The Gallery, where funders anywhere can find it.</p>
+        </div>
+        <div class="route">
+          <h3>If you fund culture</h3>
+          <p>You can browse projects by impact area, shade of impact or place. Every listing has passed the safeguards, and each one shows its full assessment.</p>
+          <p>When you fund a project and the contribution is confirmed, its CCU is added to your Impact Record. The record is audit-ready and produces disclosures in line with CSRD, SFDR and other sustainable finance frameworks.</p>
+        </div>
       </div>
+      <p class="measure note">A CCU is a record of a verified contribution. It pays no return and can’t be sold or transferred. The Gallery works with any kind of funding: grants, loans, equity, blended finance or sponsorship.</p>
     </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">II.</div>
-      <div>
-        <div class="hiw-step-name">Assess</div>
-        <div class="hiw-step-desc">Independent evaluation across Depth, Breadth, and Duration; safeguard verification across all seven gates.</div>
-      </div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">III.</div>
-      <div>
-        <div class="hiw-step-name">Record</div>
-        <div class="hiw-step-desc">On approval, a Cultural Contribution Unit (CCU) is generated and bound to the project's verified profile.</div>
-      </div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">IV.</div>
-      <div>
-        <div class="hiw-step-name">List</div>
-        <div class="hiw-step-desc">The project becomes visible in The Gallery, discoverable by allocators worldwide.</div>
-      </div>
-    </div>
-  </div>
-  <div class="hiw-side funders">
-    <div class="hiw-side-label">For Allocators &amp; Funders</div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">I.</div>
-      <div>
-        <div class="hiw-step-name">Discover</div>
-        <div class="hiw-step-desc">Browse and filter by C-Domain, Shade of Impact, or geography — every listing safeguard-verified.</div>
-      </div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">II.</div>
-      <div>
-        <div class="hiw-step-name">Review</div>
-        <div class="hiw-step-desc">Each project shows its full impact profile: dimension assessment, domain alignment, contribution claims.</div>
-      </div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">III.</div>
-      <div>
-        <div class="hiw-step-name">Fund</div>
-        <div class="hiw-step-desc">On contribution confirmation, the CCU is logged to the funder's Impact Record — an auditable attestation.</div>
-      </div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-step-num">IV.</div>
-      <div>
-        <div class="hiw-step-name">Report</div>
-        <div class="hiw-step-desc">The Impact Record generates disclosures aligned with CSRD, SFDR, and sustainable finance frameworks.</div>
-      </div>
-    </div>
-  </div>
-</div>
+  </section>
 
-<div class="hiw-pillars">
-  <div class="hiw-pillar">
-    <div class="hiw-pillar-title">Integrity Infrastructure</div>
-    <div class="hiw-pillar-text">A registry, not a speculation engine. CCUs are integrity units — not financial instruments. No financial return, non-transferable, not resellable.</div>
-  </div>
-  <div class="hiw-pillar">
-    <div class="hiw-pillar-title">Instrument-Neutral</div>
-    <div class="hiw-pillar-text">Compatible with grants, loans, equity, blended finance, and corporate sponsorship. The Gallery layers over existing capital flows.</div>
-  </div>
-  <div class="hiw-pillar">
-    <div class="hiw-pillar-title">Audit-Ready by Design</div>
-    <div class="hiw-pillar-text">Every listing, assessment, and contribution is logged. Reporting outputs align with CSRD and SFDR expectations without duplication.</div>
-  </div>
-</div>
+  <section class="block" id="pilot">
+    <div class="wrap">
+      <p class="pill-row"><span class="pill">Pilot, 2026</span></p>
+      <h2>Where we are</h2>
+      <div class="measure">
+        <p>Version 1.0 of the standard is in its pilot phase. We’re verifying our first group of pilot projects now. The Gallery and project submissions will open to the public after that.</p>
+        <p class="small">This version is for pilot use and not for citation.</p>
+      </div>
+    </div>
+  </section>
 
-</div>
-
-<div class="soon-view" id="view-soon">
-  <h1 class="soon-h1">Coming <em>Soon</em></h1>
-  <p class="soon-sub">We are currently verifying our inaugural pilot cohort. The Discovery Gallery and Project Submissions portal will open to the public shortly.</p>
-  <button class="back-btn" onclick="showView('hiw')">← Read how it works</button>
-</div>
+  <section class="block has-aura" id="people">
+    <div class="aura aura-people"></div>
+    <div class="wrap">
+      <h2>Who is behind it</h2>
+      <p class="measure">The Culture Finance Standard is a 3dots initiative.</p>
+      <div class="people">
+        <div>
+          <h3>Lead authors</h3>
+          <ul>
+            <li>Çağıl Özdemir<span>Co-founder, 3dots. Product</span></li>
+            <li>Murat Sezgi<span>Co-founder, 3dots. Business</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Partners and advisors</h3>
+          <ul>
+            <li>Funda Sezgi<span>Co-CEO, Norrsken</span></li>
+            <li>Can Atacık<span>Founder, Alethina Impact</span></li>
+            <li>Derin Altan<span>Partner, White &amp; Case</span></li>
+            <li>Gökçe Dervişoğlu<span>Academic</span></li>
+            <li>Martijn Blom<span>Impact Europe</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<footer class="foot">
-  <div class="foot-inner">
+<footer>
+  <div class="wrap">
     <div>
-      <div class="foot-brand">Culture <em>Finance</em> Standard</div>
-      <div class="foot-tagline">Infrastructure for verified cultural value creation. Operated as part of the CFS pilot programme.</div>
+      <p class="name">Culture Finance Standard</p>
+      <p>A <a href="https://www.3dots.ooo">3dots</a> initiative</p>
     </div>
-    <div class="foot-meta">
-      <div class="foot-meta-item">Pilot Phase · 2026</div>
-      <div class="foot-meta-item">Standard Version 1.0</div>
-      <div class="foot-meta-item">Not for citation</div>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <span>CCUs are integrity units, not financial instruments</span>
-    <span>Culture Finance Standard</span>
+    <p>Version 1.0, pilot 2026. Not for citation.<br>© <span id="yr">2026</span></p>
   </div>
 </footer>
 
-<script>
-// ============ VIEWS ============
-function showView(v){
-  // Toggle visibility of the main sections
-  document.getElementById('view-hiw').classList.toggle('active', v === 'hiw');
-  document.getElementById('view-soon').classList.toggle('active', v === 'soon');
-  
-  // Toggle active states on the nav buttons
-  document.getElementById('nav-hiw').classList.toggle('active', v === 'hiw');
-  document.getElementById('nav-gallery').classList.toggle('active', v === 'soon');
-  document.getElementById('nav-submit').classList.toggle('active', v === 'soon');
-  
-  // Update the sub-section title in the top left
-  document.getElementById('nav-section-title').innerText = v === 'hiw' ? 'Overview' : 'Platform';
-
-  // Scroll to top
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-</script>
-
+</div>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
